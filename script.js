@@ -7,6 +7,11 @@ async function carregarLivros() {
     const lista = document.getElementById("lista");
     lista.innerHTML = "";
 
+    if (livros.length === 0) {
+        lista.innerHTML = "<li>Nenhum livro cadastrado</li>";
+        return;
+    }
+
     livros.forEach(livro => {
         const item = document.createElement("li");
         item.textContent = `${livro.titulo} - ${livro.autor} - ${livro.preco}`;
@@ -19,28 +24,34 @@ async function adicionarLivro() {
     const autor = document.getElementById("autor").value;
     const preco = document.getElementById("preco").value;
 
+    console.log("Enviando:", { titulo, autor, preco });
+
     if (!titulo || !autor || !preco) {
         alert("Preencha todos os campos!");
         return;
     }
 
-    await fetch(API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            titulo: titulo,
-            autor: autor,
-            preco: preco
-        })
-    });
+    try {
+        const resposta = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ titulo, autor, preco })
+        });
 
-    document.getElementById("titulo").value = "";
-    document.getElementById("autor").value = "";
-    document.getElementById("preco").value = "";
+        const data = await resposta.json();
+        console.log("Resposta:", data);
 
-    carregarLivros();
+        document.getElementById("titulo").value = "";
+        document.getElementById("autor").value = "";
+        document.getElementById("preco").value = "";
+
+        carregarLivros();
+
+    } catch (erro) {
+        console.error("Erro:", erro);
+    }
 }
 
 carregarLivros();

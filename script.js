@@ -24,8 +24,6 @@ async function adicionarLivro() {
     const autor = document.getElementById("autor").value;
     const preco = document.getElementById("preco").value;
 
-    console.log("Enviando:", { titulo, autor, preco });
-
     if (!titulo || !autor || !preco) {
         alert("Preencha todos os campos!");
         return;
@@ -37,17 +35,22 @@ async function adicionarLivro() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ titulo, autor, preco })
+            body: JSON.stringify({
+                titulo,
+                autor,
+                preco
+            })
         });
 
         const data = await resposta.json();
+
         console.log("Resposta:", data);
 
         document.getElementById("titulo").value = "";
         document.getElementById("autor").value = "";
         document.getElementById("preco").value = "";
 
-        carregarLivros();
+        await carregarLivros();
 
     } catch (erro) {
         console.error("Erro:", erro);

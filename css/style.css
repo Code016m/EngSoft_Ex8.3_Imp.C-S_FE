@@ -37,6 +37,11 @@ input {
   border: 1px solid #ccc;
 }
 
+input:focus {
+  outline: none;
+  border-color: #2d89ef;
+}
+
 button {
   padding: 12px;
   background: #2d89ef;
@@ -61,9 +66,25 @@ button:hover {
   padding: 15px;
   border-left: 5px solid #2d89ef;
   border-radius: 5px;
+  transition: transform 0.2s ease;
+}
+
+.livro-card:hover {
+  transform: scale(1.02);
 }
 
 .vazio {
   text-align: center;
   color: gray;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 14px;
+  }
 }

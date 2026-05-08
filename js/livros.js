@@ -22,17 +22,20 @@ async function adicionarLivro() {
 
   try {
     await salvarLivro({ titulo, autor, preco });
+
     document.getElementById("titulo").value = "";
     document.getElementById("autor").value = "";
     document.getElementById("preco").value = "";
+
     carregarLivros();
+    alert("Livro adicionado com sucesso!");
   } catch (error) {
     console.error("Erro ao adicionar livro:", error);
   }
-  alert("Livro adicionado com sucesso!");
 }
 
 document
   .getElementById("btnAdicionar")
   .addEventListener("click", adicionarLivro);
+
 carregarLivros();

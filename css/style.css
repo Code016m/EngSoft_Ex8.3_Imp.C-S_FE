@@ -60,7 +60,7 @@ button:hover {
 .livro-card {
   background: #fafafa;
   padding: 15px;
-  border-radius: 5px solid #2d89ef;
+  border-left: 5px solid #2d89ef;
   border-radius: 5px;
 }
 

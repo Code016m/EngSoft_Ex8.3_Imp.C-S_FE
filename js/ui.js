@@ -14,7 +14,7 @@ export function renderizarLivros(livros) {
       <div class="livro-card">
         <h3>${livro.titulo}</h3>
         <p><strong>Autor:</strong> ${livro.autor}</p>
-        <p><strong>Preço:</strong> R$ ${livro.preco}</p>
+        <p><strong>Preço:</strong> R$ ${livro.preco.toFixed(2)}</p>
       </div>
     `;
   });

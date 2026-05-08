@@ -29,6 +29,7 @@ async function adicionarLivro() {
   } catch (error) {
     console.error("Erro ao adicionar livro:", error);
   }
+  alert("Livro adicionado com sucesso!");
 }
 
 document

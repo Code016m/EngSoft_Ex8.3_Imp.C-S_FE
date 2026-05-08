@@ -11,8 +11,8 @@ async function carregarLivros() {
 }
 
 async function adicionarLivro() {
-  const titulo = document.getElementById("titulo").value;
-  const autor = document.getElementById("autor").value;
+  const titulo = document.getElementById("titulo").value.trim();
+  const autor = document.getElementById("autor").value.trim();
   const preco = parseFloat(document.getElementById("preco").value);
 
   if (!titulo || !autor || isNaN(preco)) {

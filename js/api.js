@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:5000/livros/";
+const API_URL = "https://engsoft-livraria-api.onrender.com/livros/";
 
 export async function buscarLivros() {
   const response = await fetch(API_URL);

@@ -11,9 +11,14 @@ async function carregarLivros() {
 }
 
 async function adicionarLivro() {
-  const titulo = document.getElementById("titulo").value.trim();
-  const autor = document.getElementById("autor").value.trim();
-  const preco = parseFloat(document.getElementById("preco").value);
+  const tituloEl = document.getElementById("titulo");
+  const autorEl = document.getElementById("autor");
+  const precoEl = document.getElementById("preco");
+  const btn = document.getElementById("btnAdicionar");
+
+  const titulo = tituloEl.value.trim();
+  const autor = autorEl.value.trim();
+  const preco = parseFloat(precoEl.value);
 
   if (!titulo || !autor || isNaN(preco)) {
     alert("Preencha todos os campos!");
@@ -21,21 +26,31 @@ async function adicionarLivro() {
   }
 
   try {
+    btn.disabled = true;
+
     await salvarLivro({ titulo, autor, preco });
 
-    document.getElementById("titulo").value = "";
-    document.getElementById("autor").value = "";
-    document.getElementById("preco").value = "";
+    tituloEl.value = "";
+    autorEl.value = "";
+    precoEl.value = "";
 
-    carregarLivros();
+    await carregarLivros();
+
     alert("Livro adicionado com sucesso!");
   } catch (error) {
     console.error("Erro ao adicionar livro:", error);
+    alert("Erro ao adicionar livro");
+  } finally {
+    btn.disabled = false;
   }
 }
 
-document
-  .getElementById("btnAdicionar")
-  .addEventListener("click", adicionarLivro);
+function init() {
+  document
+    .getElementById("btnAdicionar")
+    .addEventListener("click", adicionarLivro);
 
-carregarLivros();
+  carregarLivros();
+}
+
+document.addEventListener("DOMContentLoaded", init);
